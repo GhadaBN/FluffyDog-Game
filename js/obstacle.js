@@ -1,46 +1,39 @@
 class Obstacle {
-  constructor(gameScreen, left, bottom, gap, imgSrcBottom, imgSrcTop) {
+  constructor(gameScreen) {
     this.gameScreen = gameScreen;
-    this.obstacleLeft = left;
-    this.obstacleBottom = bottom;
+    this.randomHeight = Math.random() * 80;
+    this.left = 960;
+    this.bottom = this.randomHeight;
     this.width = 60;
     this.height = 200;
-    this.gap = gap;
+    this.gap = 330;
 
-    // Bottom obstacle
-    this.bottomObstacle = document.createElement("img");
-    this.bottomObstacle.src = "../images/pipe-bottom.png";
-    this.bottomObstacle.style.position = "absolute";
-    this.bottomObstacle.style.left = `${this.obstacleLeft}px`;
-    this.bottomObstacle.style.bottom = `${this.obstacleBottom}px`;
-    this.bottomObstacle.style.width = `${this.width}px`;
-    this.bottomObstacle.style.height = `${this.height}px`;
-    this.gameScreen.appendChild(this.bottomObstacle);
+    //create bottom obstacle:
+    this.obstacle = document.createElement("img");
+    this.obstacle.src = "../images/pipe-bottom.png";
+    this.obstacle.style.position = "absolute";
+    this.obstacle.style.left = `${this.left}px`;
+    this.obstacle.style.bottom = `${this.bottom}px`;
+    this.gameScreen.appendChild(this.obstacle);
 
-    // Top obstacle
+    //create top obstacle:
     this.topObstacle = document.createElement("img");
     this.topObstacle.src = "../images/pipe-top.png";
     this.topObstacle.style.position = "absolute";
-    this.topObstacle.style.left = `${this.obstacleLeft}px`;
-    this.topObstacle.style.bottom = `${
-      this.obstacleBottom + this.height + this.gap
-    }px`;
-    this.topObstacle.style.width = `${this.width}px`;
-    this.topObstacle.style.height = `${this.height}px`;
+    this.topObstacle.style.left = `${this.left}px`;
+    this.topObstacle.style.bottom = `${this.bottom + this.gap}px`;
+
     this.gameScreen.appendChild(this.topObstacle);
   }
 
-  move() {
-    this.obstacleLeft -= 2;
-    this.bottomObstacle.style.left = `${this.obstacleLeft}px`;
-    this.topObstacle.style.left = `${this.obstacleLeft}px`;
-    if (this.obstacleLeft < -this.width) {
-      this.remove();
-    }
+  moveObstacle() {
+    this.left -= 2;
+    this.updatePosition();
   }
-
-  remove() {
-    this.gameScreen.removeChild(this.bottomObstacle);
-    this.gameScreen.removeChild(this.topObstacle);
+  updatePosition() {
+    this.topObstacle.style.left = `${this.left}px`;
+    this.topObstacle.style.bottom = `${this.bottom + this.gap}px`;
+    this.obstacle.style.left = `${this.left}px`;
+    this.obstacle.style.bottom = `${this.bottom}px`;
   }
 }

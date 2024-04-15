@@ -4,43 +4,34 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap"
-      rel="stylesheet"
-    />
     <link rel="stylesheet" href="./styles/style.css" />
-    <title>Fluffy Dog</title>
+    <title>Island Racer</title>
   </head>
-
   <body>
     <main>
       <!-- #game-intro is initially shown on the game start screen -->
       <div class="game-background"></div>
-
       <div id="game-intro">
         <img src="./images/Fluffy-dog-text.png" class="game-title" />
         <br />
         <img src="./images/start-button.png" class="start-button" />
         <br />
-        <!-- <p>Use the left and right arrow to control the car!</p> -->
+        <p>Use the left and right arrow to control the car!</p>
       </div>
-      <div id="game-container" style="display: none">
-        <!-- #game-screen is initially hidden using CSS style display: none -->
-        <div id="game-screen" style="display: none"></div>
-      </div>
+
+      <div id="game-screen"></div>
 
       <!-- #game-end is initially hidden using CSS style display: none -->
       <div id="game-end">
-        <img src="./images/game-over-text.png" class="game-title" />
-        <img src="./images/start-button.png" class="restart-button" />
+        <img src="./images/logo.png" alt="" class="logo-img" />
+        <h1>Game Over</h1>
+        <br />
+        <button id="restart-button">Restart</button>
       </div>
     </main>
-
-    <script type="text/javascript" src="./js/obstacle.js"></script>
-    <script type="text/javascript" src="./js/player.js"></script>
-    <script type="text/javascript" src="./js/game.js"></script>
-    <script type="text/javascript" src="./js/script.js"></script>
+    <script type="text/javascript" src="js/player.js"></script>
+    <script type="text/javascript" src="js/obstacle.js"></script>
+    <script type="text/javascript" src="js/game.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
   </body>
 </html>
