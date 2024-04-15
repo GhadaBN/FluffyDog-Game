@@ -14,10 +14,10 @@ class Game {
     this.width = 960;
     this.obstacles = [];
     this.score = 0;
-    this.lives = 3;
-    this.gamesIsOver = false;
-    this.gameIntervalId;
-    this.obstacleIntervalId;
+    this.lives = 4;
+    this.gameIsOver = false;
+    this.gameIntervalId = null;
+    this.obstacleIntervalId = null;
   }
 
   start() {
@@ -31,9 +31,7 @@ class Game {
   gameLoop() {
     this.update();
     this.checkCollisions();
-    // this.cleanUpObstacles();
-
-    if (this.gameIsOver) {
+    if (this.lives <= 0) {
       this.endGame();
     }
   }
@@ -41,32 +39,50 @@ class Game {
   update() {
     this.player.move();
     this.obstacles.forEach((obstacle) => {
-      // obstacle.obstacle.style.border = "2px solid black";
       obstacle.moveObstacle();
     });
   }
 
   checkCollisions() {
-    console.log(this.obstacles);
+    let collided = false;
+
     this.obstacles.forEach((obstacle) => {
-      if (
-        this.player.didCollide(obstacle.obstacle) ||
-        this.player.didCollide(obstacle.topObstacle)
-      ) {
-        this.gameIsOver = true;
+      // Check collision with bottom obstacle
+      if (!obstacle.collided && this.player.didCollide(obstacle.obstacle)) {
+        obstacle.collided = true; // Mark the obstacle as collided
+        collided = true; // Set collided flag to true
+        this.lives--;
+        this.updateHeartsDisplay();
+      }
+
+      // Check collision with top obstacle
+      if (!obstacle.collided && this.player.didCollide(obstacle.topObstacle)) {
+        obstacle.collided = true;
+        collided = true;
+        this.lives--;
+        console.log("Lives left:", this.lives);
+        this.updateHeartsDisplay();
       }
     });
+
+    if (collided && this.lives <= 0) {
+      console.log("Game over");
+      this.endGame();
+    }
   }
-  cleanUpObstacles() {
-    this.obstacles = this.obstacles.filter((obstacle) => {
-      if (obstacle.left < -obstacle.width) {
-        obstacle.obstacle.remove();
-        obstacle.topObstacle.remove();
-        return false;
-      }
-      return true;
-    });
+
+  updateHeartsDisplay() {
+    const heartsContainer = document.querySelector(".lives-container");
+    const hearts = heartsContainer.querySelectorAll(".heart");
+    if (hearts.length > 0) {
+      hearts[hearts.length - 1].remove(); // Remove the last heart
+    }
+
+    if (this.lives <= 0) {
+      this.endGame();
+    }
   }
+
   generateObstacle() {
     const obstacle = new Obstacle(this.gameScreen);
     this.obstacles.push(obstacle);
@@ -81,6 +97,7 @@ class Game {
     setTimeout(() => {
       this.gameScreen.style.display = "none";
     }, 2000);
+
     setTimeout(() => {
       this.gameEndScreen.style.display = "flex";
     }, 2000);

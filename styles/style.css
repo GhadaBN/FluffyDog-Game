@@ -1,10 +1,13 @@
 body {
   padding: 0;
   text-align: center;
+  font-family: "Cutive Mono", monospace;
+  color: rgb(0, 28, 239);
+  font-size: 26px;
 }
 
 .game-title {
-  width: 50%;
+  width: 600px;
   height: auto;
   top: 100px;
 }
@@ -12,7 +15,7 @@ body {
 .start-button,
 .restart-button {
   padding-top: 20px;
-  width: 13%;
+  width: 17%;
   height: auto;
 }
 .game-background {
@@ -53,11 +56,6 @@ body {
   display: none;
 }
 
-.game-intro p {
-  font-size: 18px;
-  font-family: "Verdana";
-}
-
 .ground {
   background-image: url("../images/ground-image.png");
   width: 960px;
@@ -85,4 +83,13 @@ body {
   height: 400px;
   position: absolute;
   overflow: hidden;
+}
+
+.lives-container {
+  display: flex;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: +10;
+  justify-content: space-between;
 }

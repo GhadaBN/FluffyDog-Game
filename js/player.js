@@ -5,6 +5,7 @@ class Player {
     this.bottom = 160;
     this.width = width;
     this.height = height;
+    this.minHeight = 140;
     this.jumpStrength = 25;
     this.gravity = 2;
     this.isJumping = false;
@@ -28,6 +29,9 @@ class Player {
     } else {
       // Apply gravity
       this.bottom -= this.gravity;
+    }
+    if (this.bottom < this.minHeight) {
+      this.bottom = this.minHeight;
     }
 
     // Update the player's position on the screen
