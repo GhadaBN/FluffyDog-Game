@@ -6,7 +6,6 @@ class Game {
     this.player = new Player(
       this.gameScreen,
       220,
-      100,
       80,
       68,
       "../images/player-icon.png"
@@ -18,62 +17,72 @@ class Game {
     this.lives = 3;
     this.gamesIsOver = false;
     this.gameIntervalId;
-    this.gameLoopFrequency = Math.round(1000 / 60);
+    this.obstacleIntervalId;
   }
 
   start() {
-    this.gameScreen.style.height = `${this.height}px`;
-    this.gameScreen.style.width = `${this.width}px`;
     this.startScreen.style.display = "none";
     this.gameScreen.style.display = "block";
     // Start the game loop
-    this.gameIntervalId = setInterval(() => {
-      this.gameLoop();
-    }, 20);
-
-    // Start generating obstacles
-    setInterval(() => {
-      if (!this.gameIsOver) {
-        this.generateObstacle();
-      }
-    }, 3000);
+    this.gameIntervalId = setInterval(() => this.gameLoop(), 20);
+    this.obstacleIntervalId = setInterval(() => this.generateObstacle(), 3000);
   }
 
   gameLoop() {
     this.update();
     this.checkCollisions();
-    this.cleanUpObstacles();
+    // this.cleanUpObstacles();
 
     if (this.gameIsOver) {
-      clearInterval(this.gameIntervalId);
+      this.endGame();
     }
   }
 
   update() {
-    console.log("in the update");
     this.player.move();
-    this.obstacles.forEach((obstacle) => obstacle.moveObstacle());
-  }
-  checkCollisions() {
     this.obstacles.forEach((obstacle) => {
-      if (this.player.didCollide(obstacle)) {
+      // obstacle.obstacle.style.border = "2px solid black";
+      obstacle.moveObstacle();
+    });
+  }
+
+  checkCollisions() {
+    console.log(this.obstacles);
+    this.obstacles.forEach((obstacle) => {
+      if (
+        this.player.didCollide(obstacle.obstacle) ||
+        this.player.didCollide(obstacle.topObstacle)
+      ) {
         this.gameIsOver = true;
-        console.log("Game Over!");
       }
     });
   }
   cleanUpObstacles() {
     this.obstacles = this.obstacles.filter((obstacle) => {
       if (obstacle.left < -obstacle.width) {
-        this.gameScreen.removeChild(obstacle.element);
+        obstacle.obstacle.remove();
+        obstacle.topObstacle.remove();
         return false;
       }
       return true;
     });
   }
-
   generateObstacle() {
     const obstacle = new Obstacle(this.gameScreen);
     this.obstacles.push(obstacle);
+  }
+
+  endGame() {
+    clearInterval(this.gameIntervalId);
+    clearInterval(this.obstacleIntervalId);
+
+    this.gameIsOver = true;
+
+    setTimeout(() => {
+      this.gameScreen.style.display = "none";
+    }, 2000);
+    setTimeout(() => {
+      this.gameEndScreen.style.display = "flex";
+    }, 2000);
   }
 }

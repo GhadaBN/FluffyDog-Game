@@ -6,11 +6,12 @@ body {
 .game-title {
   width: 50%;
   height: auto;
-  padding: 20px;
+  top: 100px;
 }
 
 .start-button,
 .restart-button {
+  padding-top: 20px;
   width: 13%;
   height: auto;
 }
@@ -29,7 +30,9 @@ body {
 }
 
 #game-intro,
-#game-screen {
+#game-screen,
+#game-end {
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -53,4 +56,33 @@ body {
 .game-intro p {
   font-size: 18px;
   font-family: "Verdana";
+}
+
+.ground {
+  background-image: url("../images/ground-image.png");
+  width: 960px;
+  height: 140px;
+  position: absolute;
+  top: 400px;
+  z-index: +1;
+}
+
+@keyframes slide {
+  0% {
+    background-position: 1000px 0;
+  }
+  95% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0px 0;
+  }
+}
+.sky {
+  background-image: url("../images/Sky-image.png");
+  animation: slide 30s linear infinite;
+  width: 960px;
+  height: 400px;
+  position: absolute;
+  overflow: hidden;
 }

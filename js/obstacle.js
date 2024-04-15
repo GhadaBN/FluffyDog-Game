@@ -6,7 +6,7 @@ class Obstacle {
     this.bottom = this.randomHeight;
     this.width = 60;
     this.height = 200;
-    this.gap = 330;
+    this.gap = 370;
 
     //create bottom obstacle:
     this.obstacle = document.createElement("img");
@@ -22,7 +22,6 @@ class Obstacle {
     this.topObstacle.style.position = "absolute";
     this.topObstacle.style.left = `${this.left}px`;
     this.topObstacle.style.bottom = `${this.bottom + this.gap}px`;
-
     this.gameScreen.appendChild(this.topObstacle);
   }
 

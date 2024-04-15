@@ -1,23 +1,20 @@
 class Player {
-  constructor(gameScreen, left, bottom, width, height, imgSrc) {
+  constructor(gameScreen, left, width, height, imgSrc) {
     this.gameScreen = gameScreen;
     this.left = left;
-    this.top = top;
-    this.bottom = bottom;
+    this.bottom = 160;
     this.width = width;
     this.height = height;
     this.jumpStrength = 25;
     this.gravity = 2;
     this.isJumping = false;
-
     this.element = document.createElement("img");
     this.element.src = imgSrc;
     this.element.style.position = "absolute";
     this.element.style.width = `${width}px`;
     this.element.style.height = `${height}px`;
     this.element.style.left = `${left}px`;
-    this.element.style.bottom = `${bottom}px`;
-
+    this.element.style.bottom = `${this.bottom}px`;
     this.gameScreen.appendChild(this.element);
   }
 
@@ -48,13 +45,17 @@ class Player {
 
   didCollide(obstacle) {
     const playerRect = this.element.getBoundingClientRect();
-    const obstacleRect = obstacle.element.getBoundingClientRect();
-
-    return (
+    const obstacleRect = obstacle.getBoundingClientRect();
+    if (
       playerRect.left < obstacleRect.right &&
       playerRect.right > obstacleRect.left &&
       playerRect.top < obstacleRect.bottom &&
       playerRect.bottom > obstacleRect.top
-    );
+    ) {
+      console.log("Crash!");
+      return true;
+    } else {
+      return false;
+    }
   }
 }

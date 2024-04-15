@@ -19,15 +19,20 @@
         <p>Use the left and right arrow to control the car!</p>
       </div>
 
-      <div id="game-screen"></div>
+      <div id="game-screen">
+        <div class="sky"></div>
+        <div class="ground"></div>
+      </div>
 
       <!-- #game-end is initially hidden using CSS style display: none -->
       <div id="game-end">
-        <img src="./images/logo.png" alt="" class="logo-img" />
-        <h1>Game Over</h1>
+        <img src="./images/game-over-text.png" class="game-title" />
         <br />
-        <button id="restart-button">Restart</button>
+        <img src="./images/start-button.png" class="restart-button" />
+        <br />
+        <p>Use the left and right arrow to control the car!</p>
       </div>
+      <!-- <button id="restart-button">Restart</button> -->
     </main>
     <script type="text/javascript" src="js/player.js"></script>
     <script type="text/javascript" src="js/obstacle.js"></script>
