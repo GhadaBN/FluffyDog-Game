@@ -18,6 +18,12 @@ body {
   width: 17%;
   height: auto;
 }
+/* .dog-intro {
+  position: absolute;
+  top: 270px;
+  left: 300px;
+  width: 150px;
+} */
 .game-background {
   position: absolute;
   top: 50%;

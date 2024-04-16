@@ -23,6 +23,10 @@
         <img src="./images/Fluffy-dog-text.png" class="game-title" />
         <br />
         <img src="./images/start-button.png" class="start-button" />
+        <!-- <img
+          src="./images/ffa30788531915.5dd8fe3824063.gif"
+          class="dog-intro"
+        /> -->
         <!-- <br />
         <p>Use the left and right arrow to control the car!</p> -->
       </div>
@@ -46,13 +50,24 @@
         <!-- <br />
         <p>Use the left and right arrow to control the car!</p> -->
       </div>
-      <!-- Audio elements -->
-      <audio id="hitSound" src="path/to/hit-sound.mp3"></audio>
-      <audio id="pointSound" src="path/to/point-sound.mp3"></audio>
+
+      <audio
+        id="soundtrack"
+        src="./Audio/Shiba Inu.mp3"
+        preload="auto"
+        loop
+      ></audio>
     </main>
+
     <script type="text/javascript" src="js/player.js"></script>
     <script type="text/javascript" src="js/obstacle.js"></script>
     <script type="text/javascript" src="js/game.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
+    <script>
+      document.body.addEventListener("click", function () {
+        var audio = document.getElementById("soundtrack");
+        audio.play();
+      });
+    </script>
   </body>
 </html>

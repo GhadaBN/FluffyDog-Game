@@ -2,6 +2,7 @@ window.onload = function () {
   const startButton = document.querySelector(".start-button");
   const restartButton = document.querySelector(".restart-button");
   let game;
+  let audio;
 
   startButton.addEventListener("click", function () {
     startGame();
@@ -12,7 +13,6 @@ window.onload = function () {
   });
 
   function startGame() {
-    console.log("start game");
     game = new Game();
     game.start();
   }
@@ -20,6 +20,7 @@ window.onload = function () {
   function restartGame() {
     location.reload();
   }
+
   function control(event) {
     if (event.keyCode === 38 || event.keyCode === 32) {
       game.player.jump();
